@@ -87,7 +87,21 @@ function handler(event) {
   if (event.target.nodeName !== "IMG") {
     return;
   }
-  const chosenImg = event.target.getAttribute("data-source");
-  const instance = basicLightbox.create(`<img src="${chosenImg}">`);
+  const bigImgDiv = document.createElement("div");
+  const bigImg = document.createElement("img");
+  bigImg.src = event.target.getAttribute("data-source");
+  bigImg.alt = event.target.getAttribute("alt");
+  bigImgDiv.appendChild(bigImg);
+  const instance = basicLightbox.create(bigImgDiv);
   instance.show();
 }
+
+// це був перший варіант - він теж працює:
+
+//   const chosenSrc = event.target.getAttribute("data-source");
+//   const chosenAlt = event.target.getAttribute("alt");
+//   const instance = basicLightbox.create(
+//     `<img src="${chosenSrc}" alt="${chosenAlt}">`
+//   );
+//   instance.show();
+// }
